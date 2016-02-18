@@ -8,24 +8,47 @@
 
 import UIKit
 
-class QuoteViewController: UIViewController {
+class QuoteViewController: UIView {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    var quoteObject: QuoteObject?
     
 
+    required init?(coder aDecoder: NSCoder) {
+        //fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        NSBundle.mainBundle().loadNibNamed("QuoteViewController", owner: self, options: nil)
+        self.addSubview(self);
+        self.setUp()
+    }
+    
+    init() {
+        super.init(frame: UIScreen.mainScreen().bounds)
+        self.setUp()
+        
+    }
+
+    func setUp() {
+        if let object = quoteObject {
+            Downloads.sharedInstance.getImage(object.imageURLString ) { image in
+                if let newImage = image {
+                    self.imageView.image = newImage
+                    object.image = newImage
+                    
+                }
+            }
+            Downloads.sharedInstance.getQuote(object.imageURLString, completion: { (quote, author) -> Void in
+                self.quoteLabel.text = quote
+                object.quote = quote
+                self.authorLabel.text = author
+                object.author = author
+            })
+            
+        }
+
+    }
     /*
     // MARK: - Navigation
 

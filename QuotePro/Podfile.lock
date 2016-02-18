@@ -1,0 +1,18 @@
+PODS:
+  - Nuke (2.0.1)
+  - Realm (0.98.1):
+    - Realm/Headers (= 0.98.1)
+  - Realm/Headers (0.98.1)
+  - RealmSwift (0.98.1):
+    - Realm (= 0.98.1)
+
+DEPENDENCIES:
+  - Nuke
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  Nuke: 238b1d1b91fa3b7f173ef7c7e659d9bdc735c2cf
+  Realm: ca4a4122e939e228e10694fc49011386cb2ecb07
+  RealmSwift: 7d3c7033427816a2c3417ba0d004d694987e503a
+
+COCOAPODS: 0.39.0
